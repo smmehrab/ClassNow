@@ -1,0 +1,16 @@
+{
+  "name": "classnow-algorithm",
+  "version": "1.0.0",
+  "description": "Core Solution - Algorithm",
+  "main": "scheduler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node scheduler.js"
+  },
+  "author": "smmehrab",
+  "license": "ISC",
+  "dependencies": {
+    "googleapis": "^39.2.0",
+    "xlsx": "^0.16.9"
+  }
+}
