@@ -16,7 +16,7 @@ function loadInput() {
     const input = ExcelReader.readFile(inputPath);
     const numberOfSheets = input.SheetNames.length;
     for(let i = 0; i < numberOfSheets; i++) {
-        const entries = reader.utils.sheet_to_json(input.Sheets[input.SheetNames[i]]);
+        const entries = ExcelReader.utils.sheet_to_json(input.Sheets[input.SheetNames[i]]);
         let index = 0;
         entries.forEach((entry) => {
             if(input.SheetNames[i] == "sessions") {
@@ -41,9 +41,9 @@ function showInput() {
 }
 
 function solve() {
-    
+
 }
 
 loadInput();
-// showInput();
+showInput();
 solve();
