@@ -10,6 +10,7 @@ const Teacher = require('./classes/teacher');
 var sessions = [];
 var timeSlots = [];
 var teachers = [];
+var batches = {};
 
 // Methods
 function loadInput() {
@@ -35,12 +36,17 @@ function loadInput() {
             index++;
         });
     }
+
+    for(let id=1; id<4; id++) {
+        batches[id] = new Batch(id);
+    }
 }
 
 function showInput() {
-    console.log(sessions);
+    // console.log(sessions);
     // console.log(timeSlots);
     // console.log(teachers);
+    // console.log(batches);
 }
 
 function solve() {
@@ -54,7 +60,6 @@ solve();
 
 
 /*
-
 
 Routines = [ Routine1[5][5], Routine2[5][5], Routine3[5][5] ];
 
