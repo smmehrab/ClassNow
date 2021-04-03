@@ -3,6 +3,7 @@ const ExcelReader = require('xlsx');
 
 // Classes
 const Session = require('./classes/session');
+const Batch = require('./classes/batch');
 const Teacher = require('./classes/teacher');
 
 // Variables
@@ -20,7 +21,9 @@ function loadInput() {
         let index = 0;
         entries.forEach((entry) => {
             if(input.SheetNames[i] == "sessions") {
-                sessions.push(new Session(entry.semester, entry.course, entry.type, entry.credit, entry.teachers));
+                if(entry.teachers && entry.teachers.length>0) {
+                    sessions.push(new Session(entry.semester, entry.course, entry.type, entry.group, entry.credit, entry.teachers));
+                }
             }
             else if(input.SheetNames[i] == "timeSlots") {
                 timeSlots.push(entry);
@@ -37,7 +40,7 @@ function loadInput() {
 function showInput() {
     console.log(sessions);
     // console.log(timeSlots);
-    console.log(teachers);
+    // console.log(teachers);
 }
 
 function solve() {
@@ -47,3 +50,15 @@ function solve() {
 loadInput();
 showInput();
 solve();
+
+
+
+/*
+
+
+Routines = [ Routine1[5][5], Routine2[5][5], Routine3[5][5] ];
+
+
+
+
+*/
