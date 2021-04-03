@@ -47,6 +47,10 @@ function showInput() {
     // console.log(timeSlots);
     // console.log(teachers);
     // console.log(batches);
+
+    teachers.forEach(teacher => {
+        console.log(teacher.timeSlots);
+    });
 }
 
 function solve() {
@@ -56,7 +60,6 @@ function solve() {
 loadInput();
 showInput();
 solve();
-
 
 
 /*
