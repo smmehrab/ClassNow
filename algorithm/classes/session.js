@@ -3,6 +3,12 @@ class Session {
         this.semester = semester;
         this.course = course;
         this.type = type;
+        if(type == "Theory") {
+            this.count = 2; 
+        }
+        else{
+            this.count = 1; 
+        }
         if(group) {
             this.group = group;
         }
