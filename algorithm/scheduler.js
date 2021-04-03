@@ -13,6 +13,24 @@ var teachers = [];
 var batches = {};
 
 // Methods
+
+function sessionCompare(a, b){
+    if(a.type.length == b.type.length) {
+        if(a.semester == b.semester) {
+            if(a.course.substring(3) == b.course.substring(3) && a.type == "Lab") {
+                return (a.group > b.group) ? 1 : -1;
+            }
+            else{
+                return (a.course.substring(3) > b.course.substring(3)) ? 1 : -1;
+            }
+        }
+        else{
+            return (a.semester > b.semester) ? 1 : -1;
+        }
+    }
+    return (a.type.length > b.type.length) ? 1 : -1;
+}
+
 function loadInput() {
     const inputPath = './data/input.xlsx';
     const input = ExcelReader.readFile(inputPath);
@@ -40,26 +58,23 @@ function loadInput() {
     for(let id=1; id<4; id++) {
         batches[id] = new Batch(id);
     }
-}
 
+    sessions.sort(sessionCompare);
+}
+  
 function showInput() {
     // console.log(sessions);
     // console.log(timeSlots);
     // console.log(teachers);
     // console.log(batches);
 
-    teachers.forEach(teacher => {
-        console.log(teacher.timeSlots);
-    });
-}
-
-function solve() {
-
+    // teachers.forEach(teacher => {
+    //     console.log(teacher.timeSlots);
+    // });
 }
 
 loadInput();
 showInput();
-solve();
 
 
 /*
