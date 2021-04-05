@@ -56,7 +56,15 @@ function load(inputPath, sessions, timeSlots, teachers, batches) {
 
     sessions.sort(sessionCompare);
 }
-  
+
+function findTeacher(id, teachers) {
+    for(let index=0; index<teachers.length; index++) {
+        if(teachers[index].id == id) {
+            return teachers[index];
+        }
+    }
+}
+
 // For Debugging
 function show(sessions, timeSlots, teachers, batches) {
     console.log(sessions);
@@ -71,3 +79,4 @@ function show(sessions, timeSlots, teachers, batches) {
 
 module.exports.load = load;
 module.exports.show = show;
+module.exports.findTeacher = findTeacher;
