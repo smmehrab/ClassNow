@@ -1,8 +1,8 @@
 class Batch {
     constructor(id) {
         this.id = id;
-        this.timeSlotsGA = [0, 0, 0, 0, 0]
-        this.timeSlotsGB = [0, 0, 0, 0, 0]
+        this.timeSlotsGA = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]];
+        this.timeSlotsGB = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]];
     }
     
     getTimeSlots(group) {
@@ -14,48 +14,50 @@ class Batch {
             return this.timeSlotsGB;
         }
 
-        timeSlots = [];
-        for(let slot=0; slot<5; slot++) {
-            timeSlots.push((this.timeSlotsGA[slot] || this.timeSlotsGB[slot]));
+        timeSlots = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]];
+        for(let day=0; day<5; day++) {
+            for(let slot=0; slot<5; slot++) {
+                timeSlots[day][slot] = (this.timeSlotsGA[day][slot] || this.timeSlotsGB[day][slot]);
+            }
         }
         return this.timeSlots;
     }
 
-    isTimeSlotFree(group, slot) {
+    isTimeSlotFree(group, day, slot) {
         if(group == "GA") {
-            return (this.timeSlotsGA[slot]==0);
+            return (this.timeSlotsGA[day][slot]==0);
         }
         else if(group == "GB") {
-            return (this.timeSlotsGB[slot]==0);
+            return (this.timeSlotsGB[day][slot]==0);
         }
         else {
-            return (this.timeSlotsGA[slot]==0 && this.timeSlotsGB[slot]==0);
+            return (this.timeSlotsGA[day][slot]==0 && this.timeSlotsGB[day][slot]==0);
         }
     }
 
-    occupyTimeSlot(group, slot) {
+    occupyTimeSlot(group, day, slot) {
         if(group == "GA") {
-            this.timeSlotsGA[slot] = 1;
+            this.timeSlotsGA[day][slot] = 1;
         }
         else if(group == "GB") {
-            this.timeSlotsGB[slot] = 1;
+            this.timeSlotsGB[day][slot] = 1;
         }
         else {
-            this.timeSlotsGA[slot] = 1;
-            this.timeSlotsGB[slot] = 1;
+            this.timeSlotsGA[day][slot] = 1;
+            this.timeSlotsGB[day][slot] = 1;
         }
     }
 
-    freeTimeSlot(group, slot) {
+    freeTimeSlot(group, day, slot) {
         if(group == "GA") {
-            this.timeSlotsGA[slot] = 0;
+            this.timeSlotsGA[day][slot] = 0;
         }
         else if(group == "GB") {
-            this.timeSlotsGB[slot] = 0;
+            this.timeSlotsGB[day][slot] = 0;
         }
         else {
-            this.timeSlotsGA[slot] = 0;
-            this.timeSlotsGB[slot] = 0;
+            this.timeSlotsGA[day][slot] = 0;
+            this.timeSlotsGB[day][slot] = 0;
         }
     }
 };
