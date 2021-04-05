@@ -58,11 +58,14 @@ function load(inputPath, sessions, timeSlots, teachers, batches) {
 }
 
 function findTeacher(id, teachers) {
-    for(let index=0; index<teachers.length; index++) {
-        if(teachers[index].id == id) {
-            return teachers[index];
+    if(id) {
+        for(let index=0; index<teachers.length; index++) {
+            if(teachers[index].id == id) {
+                return teachers[index];
+            }
         }
-    }
+    } 
+    return false;
 }
 
 // For Debugging
