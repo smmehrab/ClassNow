@@ -3,6 +3,7 @@ class Session {
         this.semester = semester;
         this.course = course;
         this.type = type;
+        this.batch = course[4];
         if(group) {
             this.group = group;
         }
