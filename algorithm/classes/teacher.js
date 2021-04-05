@@ -10,6 +10,7 @@ class Teacher {
     formatTimeSlots(timeSlots) {
         for (var day of Object.keys(timeSlots)) {
             let dayTimeSlots = timeSlots[day].split(";");
+
             // 24 Hour Formatting            
             // for(let i=0; i<timeSlots[day].length; i++) {
             //     let times = dayTimeSlots[i].split("-");
@@ -98,6 +99,22 @@ class Teacher {
         // console.log(this.id);
         // console.log(timeSlots);
         return timeSlots;
+    }
+
+    getTimeSlots() {
+        return this.timeSlots;
+    }
+
+    isTimeSlotFree(slot) {
+        return this.timeSlots[slot] == 0;
+    }
+
+    occupyTimeSlot(slot) {
+        this.timeSlots[slot] = 1;
+    }
+
+    freeTimeSlot(slot) {
+        this.timeSlots[slot] = 0;
     }
 };
 
