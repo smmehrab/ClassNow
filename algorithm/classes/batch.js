@@ -5,46 +5,58 @@ class Batch {
         this.timeSlotsGB = [0, 0, 0, 0, 0]
     }
     
-    getTimeSlots() {
+    getTimeSlots(group) {
+        if(group == "GA") {
+            return this.timeSlotsGA;
+        }
+
+        if(group == "GB") {
+            return this.timeSlotsGB;
+        }
+
         timeSlots = [];
         for(let slot=0; slot<5; slot++) {
             timeSlots.push((this.timeSlotsGA[slot] || this.timeSlotsGB[slot]));
         }
-        return this.timeSlotsGA;
+        return this.timeSlots;
     }
 
-    getTimeSlotsGA() {
-        return this.timeSlotsGA;
+    isTimeSlotFree(group, slot) {
+        if(group == "GA") {
+            return (this.timeSlotsGA[slot]==0);
+        }
+        else if(group == "GB") {
+            return (this.timeSlotsGB[slot]==0);
+        }
+        else {
+            return (this.timeSlotsGA[slot]==0 && this.timeSlotsGB[slot]==0);
+        }
     }
 
-    getTimeSlotsGB() {
-        return this.timeSlotsGB;
+    occupyTimeSlot(group, slot) {
+        if(group == "GA") {
+            this.timeSlotsGA[slot] = 1;
+        }
+        else if(group == "GB") {
+            this.timeSlotsGB[slot] = 1;
+        }
+        else {
+            this.timeSlotsGA[slot] = 1;
+            this.timeSlotsGB[slot] = 1;
+        }
     }
 
-    occupyTimeSlot(slot) {
-        this.timeSlotsGA[slot] = 1;
-        this.timeSlotsGB[slot] = 1;
-    }
-
-    occupyTimeSlotGA(slot) {
-        this.timeSlotsGA[slot] = 1;
-    }
-
-    occupyTimeSlotGB(slot) {
-        this.timeSlotsGB[slot] = 1;
-    }
-
-    freeTimeSlot(slot) {
-        this.timeSlotsGA[slot] = 0;
-        this.timeSlotsGB[slot] = 0;
-    }
-
-    freeTimeSlotGA(slot) {
-        this.timeSlotsGA[slot] = 0;
-    }
-
-    freeTimeSlotGB(slot) {
-        this.timeSlotsGB[slot] = 0;
+    freeTimeSlot(group, slot) {
+        if(group == "GA") {
+            this.timeSlotsGA[slot] = 0;
+        }
+        else if(group == "GB") {
+            this.timeSlotsGB[slot] = 0;
+        }
+        else {
+            this.timeSlotsGA[slot] = 0;
+            this.timeSlotsGB[slot] = 0;
+        }
     }
 };
 
