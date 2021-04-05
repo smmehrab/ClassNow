@@ -3,7 +3,7 @@ class Session {
         this.semester = semester;
         this.course = course;
         this.type = type;
-        this.batch = course[4];
+        this.batch = course.split(" ")[1][0];
         if(group) {
             this.group = group;
         }
