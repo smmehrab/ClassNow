@@ -105,16 +105,16 @@ class Teacher {
         return this.timeSlots;
     }
 
-    isTimeSlotFree(slot) {
-        return this.timeSlots[slot] == 0;
+    isTimeSlotFree(day, slot) {
+        return this.timeSlots[day][slot] == 0;
     }
 
-    occupyTimeSlot(slot) {
-        this.timeSlots[slot] = 1;
+    occupyTimeSlot(day, slot) {
+        this.timeSlots[day][slot] = 1;
     }
 
-    freeTimeSlot(slot) {
-        this.timeSlots[slot] = 0;
+    freeTimeSlot(day, slot) {
+        this.timeSlots[day][slot] = 0;
     }
 };
 
