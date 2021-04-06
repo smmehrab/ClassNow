@@ -40,6 +40,38 @@ class Routine {
         }
     }
 
+    _toDay(dayIndex) {
+        switch(dayIndex) {
+            case 0:
+                return "sunday";
+            case 1:
+                return "monday";
+            case 2:
+                return "tuesday";
+            case 3:
+                return "wednesday";
+            case 4:
+                return "thursday";
+            default:
+        }
+    }
+
+    _toSlot(slotIndex) {
+        switch(slotIndex) {
+            case 0:
+                return "08:30 AM";
+            case 1:
+                return "10:00 AM";
+            case 2:
+                return "11:30 AM";
+            case 3:
+                return "02:00 PM";
+            case 4:
+                return "03:30 PM";
+            default:
+        }
+    }
+
     setSession(dayIndex, slotIndex, sessionIndex) {
         let dayCount = 0;
         Object.keys(this.states).forEach((day)=>{
@@ -74,6 +106,12 @@ class Routine {
             }
             dayCount++;
         });
+    }
+
+    getSessions(dayIndex, slotIndex) {
+        let day = this._toDay(dayIndex);
+        let slot = this._toSlot(slotIndex);
+        return this.states[day][slot];
     }
 };
 
