@@ -3,6 +3,15 @@ const Routine = require('./../classes/routine');
 
 function showRoutines(routines, sessions) {
     
+    var titleConfig = {
+        columns: {
+            0: {
+                alignment: 'center',
+                width: 100
+            }
+        }
+    }
+
     var config = {
         columns: {
             0: {
@@ -32,14 +41,26 @@ function showRoutines(routines, sessions) {
         }
     };
 
-    var data, output;
+    var title, data, output;
     let yearNames = ["First", "Second", "Third", "Fourth"];
 
-    console.log("CSEDU Routines");
-    console.log();
-    for(let batch=1; batch<=3; batch++) {
-        console.log(yearNames[batch-1] + " Year Routine");
+    title = [
+        ['CSEDU Routines']
+    ];
 
+    output = Table.table(title, titleConfig);
+    console.log(output);
+
+    for(let batch=1; batch<=3; batch++) {
+
+        title = [
+            [yearNames[batch-1] + " Year Routine"]
+        ];
+        
+        console.log();
+        output = Table.table(title, titleConfig);
+        console.log(output);
+    
         data = [
             ['Day/Time', '08:30 AM', '10:00 AM', '11:30 AM', '02:00 PM', '03:30 PM'],
             ['Sunday', '', '', '', '', ''],
