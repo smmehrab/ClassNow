@@ -12,14 +12,11 @@ var sessions = [];
 var timeSlots = [];
 var teachers = [];
 var batches = {};
-
-// var routine = {
-//     1 : [ [-1, -1, -1, -1, -1], [-1, -1, -1, -1, -1], [-1, -1, -1, -1, -1], [-1, -1, -1, -1, -1], [-1, -1, -1, -1, -1] ],
-//     2 : [ [-1, -1, -1, -1, -1], [-1, -1, -1, -1, -1], [-1, -1, -1, -1, -1], [-1, -1, -1, -1, -1], [-1, -1, -1, -1, -1] ],
-//     3 : [ [-1, -1, -1, -1, -1], [-1, -1, -1, -1, -1], [-1, -1, -1, -1, -1], [-1, -1, -1, -1, -1], [-1, -1, -1, -1, -1] ],
-// }
-
-var routines = {1 : new Routine(1), 2 : new Routine(2), 3 : new Routine(3)};
+var routines = {
+    1 : new Routine(1), 
+    2 : new Routine(2), 
+    3 : new Routine(3)
+};
 
 /* Functions */
 
@@ -38,7 +35,6 @@ function solve(index) {
     // console.log(session);
 
     if(session.type == "Lab") {
-
         let group = session.group;
         let teacher1 = Input.findTeacher(session.teachers[0], teachers);
         let teacher2 = Input.findTeacher(session.teachers[1], teachers);
@@ -58,10 +54,9 @@ function solve(index) {
                                 teacher2.occupyTimeSlot(day, slot);
                                 teacher2.occupyTimeSlot(day, slot+1);
                             }
-                            // routine[session.batch][day][slot] = index;
-                            // routine[session.batch][day][slot+1] = index;
                             routines[session.batch].setSession(day, slot, index);
                             routines[session.batch].setSession(day, slot+1, index);
+                            sessions[index].decrementCount();
 
                             isValidDecision = solve(index+1);
 
@@ -76,13 +71,9 @@ function solve(index) {
                                     teacher2.freeTimeSlot(day, slot);
                                     teacher2.freeTimeSlot(day, slot+1);
                                 }
-                                // routine[session.batch][day][slot] = -1;
-                                // routine[session.batch][day][slot+1] = -1;
                                 routines[session.batch].removeSession(day, slot, index);
                                 routines[session.batch].removeSession(day, slot+1, index);
-                            }
-                            else {
-                                sessions[index].decrementCount();
+                                sessions[index].incrementCount();
                             }
                         }
                     }
@@ -93,6 +84,10 @@ function solve(index) {
 
     else if(session.type == "Theory") {
 
+        if(session.count == 1) {
+            console.log(session);
+        }
+
         let group = "ALL";
         let teacher = Input.findTeacher(session.teachers[0], teachers);
 
@@ -101,16 +96,16 @@ function solve(index) {
                 if(teacher.isTimeSlotFree(day, slot) && batch.isTimeSlotFree(group, day, slot)) {
                     batch.occupyTimeSlot(group, day, slot);
                     teacher.occupyTimeSlot(day, slot);
-                    // routine[session.batch][day][slot] = index;
                     routines[session.batch].setSession(day, slot, index);
+                    sessions[index].decrementCount();
 
                     isValidDecision = solve(index+1);
 
                     if(!isValidDecision) {
                         batch.freeTimeSlot(group, day, slot);
                         teacher.freeTimeSlot(day, slot);
-                        // routine[session.batch][day][slot] = -1;
                         routines[session.batch].removeSession(day, slot, index);
+                        sessions[index].incrementCount();
                     }
                 }
             }
@@ -125,12 +120,19 @@ function main() {
     // Input.show(sessions, timeSlots, teachers, batches);
 
     var isPossible = solve(0);
+    if(isPossible) {
+        isPossible = solve(0);
+    }
 
     // console.log(isPossible);
-    Output.showRoutines(routines, sessions);
+    if(isPossible) {
+        Output.showRoutines(routines, sessions);
+    }
+    else {
+        console.log("Not Possible");
+    }
     // Output.debugRoutines(routines);
 }
 
 /* Executions */
-
 main();

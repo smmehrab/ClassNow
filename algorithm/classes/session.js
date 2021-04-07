@@ -14,9 +14,11 @@ class Session {
     }
 
     decrementCount() {
-        if(this.count>0) {
-            this.count--;
-        }
+        this.count--;
+    }
+
+    incrementCount() {
+        this.count++;
     }
 };
 
