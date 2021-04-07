@@ -56,7 +56,7 @@ function showRoutines(routines, sessions) {
         title = [
             [yearNames[batch-1] + " Year Routine"]
         ];
-        
+
         console.log();
         output = Table.table(title, titleConfig);
         console.log(output);
@@ -79,9 +79,12 @@ function showRoutines(routines, sessions) {
                         let sessionName = session.course;
                         if(session.type == "Lab") {
                             sessionName += " " + session.group;
+                            if(session.isAlternate) {
+                                sessionName += "\n" + "(alternate)";
+                            }
                         }
                         if(data[day+1][slot+1].length>0) {
-                            data[day+1][slot+1] += '\n';
+                            data[day+1][slot+1] += '\n\n';
                         }
                         data[day+1][slot+1] += sessionName;
                     });
