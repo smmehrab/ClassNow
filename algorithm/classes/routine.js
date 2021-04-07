@@ -93,6 +93,27 @@ class Routine {
         let slot = this._toSlot(slotIndex);
         return this.states[day][slot];
     }
+
+    isSameDayAlreadyASession(dayIndex, sessionIndex) {
+        let day = this._toDay(dayIndex);
+        let alreadyASession = false;
+
+        // console.log(this.states[day]);
+        // console.log(sessionIndex);
+
+        Object.keys(this.states[day]).forEach((slot) => {
+            let index = 0;
+            this.states[day][slot].forEach(session => {
+                if(sessionIndex == session) {
+                    // console.log(day + " " + slot + " " + index + " " + session + " " + sessionIndex);
+                    alreadyASession = true;
+                }
+                index++;
+            });
+        });
+        // console.log(alreadyASession);
+        return alreadyASession;
+    }
 };
 
 module.exports = Routine;
