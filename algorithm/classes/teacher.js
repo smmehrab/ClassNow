@@ -6,6 +6,43 @@ class Teacher {
         this.courses = (courses) ? courses.split(";") : []; 
         this.timeSlots = this.parseTimeSlots(timeSlotsInput);
     }
+    
+    _toDayIndex(day) {
+        switch(day) {
+            case "sunday":
+                return 0;
+            case "monday":
+                return 1;
+            case "tuesday":
+                return 2;
+            case "wednesday":
+                return 3;
+            case "thursday":
+                return 4;
+            default:
+        }
+    }
+
+    _toSlot(time) {
+        switch(time) {
+            case "8:30":
+                return 0;
+            case "08:30":
+                return 0;
+            case "10:00":
+                return 1;
+            case "11:30":
+                return 2;
+            case "13:00":
+                return 3;
+            case "15:30":
+                return 4;
+            case "17:00":
+                return 5;
+            default:
+                return 0;
+        }
+    }
 
     parseTimeSlots(timeSlotsInput) {
         var timeSlots = [[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]];
@@ -29,65 +66,9 @@ class Teacher {
                 }
                 // console.log(times[0] + " - " + times[1]);
 
-                let start=0;
-                switch(times[0]) {
-                    case "8:30":
-                        start = 0;
-                        break;
-                    case "10:00":
-                        start = 1;
-                        break;
-                    case "11:30":
-                        start = 2;
-                        break;
-                    case "14:00":
-                        start = 3;
-                        break;
-                    case "15:30":
-                        start = 4;
-                        break;
-                    default:
-                }
-
-                let end=start+1;
-                switch(times[1]) {
-                    case "10:00":
-                        end = 1;
-                        break;
-                    case "11:30":
-                        end = 2;
-                        break;
-                    case "13:00":
-                        end = 3;
-                        break;
-                    case "15:30":
-                        end = 4;
-                        break;
-                    case "17:00":
-                        end = 5;
-                        break;
-                    default:
-                }
-
-                let dayIndex;
-                switch(day) {
-                    case "sunday":
-                        dayIndex = 0;
-                        break;
-                    case "monday":
-                        dayIndex = 1;
-                        break;
-                    case "tuesday":
-                        dayIndex = 2;
-                        break;
-                    case "wednesday":
-                        dayIndex = 3;
-                        break;
-                    case "thursday":
-                        dayIndex = 4;
-                        break;
-                    default:
-                }
+                let start = this._toSlot(times[0]);
+                let end = this._toSlot(times[1]);
+                let dayIndex = this._toDayIndex(day);
 
                 // console.log(start + " " + end);
                 for(let i=start; i<end; i++) {
