@@ -84,14 +84,22 @@ function solve(index) {
 
     else if(session.type == "Theory") {
 
-        if(session.count == 1) {
-            console.log(session);
-        }
+        // if(session.count == 1) {
+        //     console.log(session);
+        //      // Find Which Course is stuck
+        // }
 
         let group = "ALL";
         let teacher = Input.findTeacher(session.teachers[0], teachers);
 
         for(let day=0; day<5 && !isValidDecision; day++) {
+            if(session.count == 1) {
+                if(routines[session.batch].isSameDayAlreadyASession(day, index)) {
+                    // console.log(session.course);
+                    continue;
+                }
+            }
+
             for(let slot=0; slot<5 && !isValidDecision; slot++) {
                 if(teacher.isTimeSlotFree(day, slot) && batch.isTimeSlotFree(group, day, slot)) {
                     batch.occupyTimeSlot(group, day, slot);
@@ -119,18 +127,21 @@ function main() {
     Input.load('./data/input.xlsx', sessions, timeSlots, teachers, batches);
     // Input.show(sessions, timeSlots, teachers, batches);
 
+    // Assigning One Period Per Session
     var isPossible = solve(0);
+
+    //  Assigning 2nd Period of the 2 Periods' Sessions
     if(isPossible) {
         isPossible = solve(0);
     }
 
-    // console.log(isPossible);
     if(isPossible) {
         Output.showRoutines(routines, sessions);
     }
     else {
         console.log("Not Possible");
     }
+
     // Output.debugRoutines(routines);
 }
 
