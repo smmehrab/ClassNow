@@ -5,7 +5,8 @@
   "main": "scheduler.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node scheduler.js"
+    "start": "node scheduler.js",
+    "preinstall": "npx npm-force-resolutions"
   },
   "author": "smmehrab",
   "license": "ISC",
@@ -13,5 +14,8 @@
     "googleapis": "^39.2.0",
     "table": "^6.0.9",
     "xlsx": "^0.16.9"
+  },
+  "resolutions": {
+    "node-forge": "0.10.0"
   }
 }
