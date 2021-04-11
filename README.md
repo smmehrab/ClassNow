@@ -5,8 +5,8 @@ A Class Scheduler App which will schedule the classes for different courses, tea
 
 <div>
 
-![https://nodejs.org/en/](https://raw.githubusercontent.com/smmehrab/classnow/master/documentation/badges/node.svg)
-![https://www.npmjs.com/](https://raw.githubusercontent.com/smmehrab/classnow/master/documentation/badges/npm.svg)
+![https://nodejs.org/en/](./documentation/badges/node.png)
+![https://www.npmjs.com/](./documentation/badges/npm.png)
 [![Generic license](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/smmehrab/lexicon/blob/documentation/LICENSE)
 
 </div>
