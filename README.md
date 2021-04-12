@@ -35,3 +35,7 @@ A Class Scheduler App which will schedule the classes for different courses, tea
     npm start
     ```
     (This will internally run ```scheduler.js```)
+
+This will show the following output on terminal, for the [sample input](https://raw.githubusercontent.com/smmehrab/ClassNow/master/algorithm/data/input.xlsx).
+
+<img src="https://raw.githubusercontent.com/smmehrab/ClassNow/master/documentation/screenshots/output.png">
