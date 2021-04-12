@@ -19,7 +19,7 @@ A Class Scheduler App which will schedule the classes for different courses, tea
 
 1. Clone/Download the repository.
 
-2. Go to ```algorithm``` directory.
+2. Go to [algorithm](https://github.com/smmehrab/ClassNow/tree/master/algorithm) directory.
     ```
     cd algorithm/
     ```
@@ -34,7 +34,7 @@ A Class Scheduler App which will schedule the classes for different courses, tea
     ```
     npm start
     ```
-    (This will internally run ```scheduler.js```)
+    (This will internally run [scheduler.js](https://github.com/smmehrab/ClassNow/blob/master/algorithm/scheduler.js))
 
 This will show the following output on terminal, for the [sample input](https://raw.githubusercontent.com/smmehrab/ClassNow/master/algorithm/data/input.xlsx).
 
