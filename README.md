@@ -36,6 +36,27 @@ A Class Scheduler App which will schedule the classes for different courses, tea
     ```
     (This will internally run [scheduler.js](https://github.com/smmehrab/ClassNow/blob/master/algorithm/scheduler.js))
 
-This will show the following output on terminal, for the [sample input](https://raw.githubusercontent.com/smmehrab/ClassNow/master/algorithm/data/input.xlsx).
+This will show the following [output](https://raw.githubusercontent.com/smmehrab/ClassNow/documentation/documentation/screenshots/output.png) on terminal, for the [sample input](https://raw.githubusercontent.com/smmehrab/ClassNow/master/algorithm/data/input.xlsx). 
 
-<img src="https://raw.githubusercontent.com/smmehrab/ClassNow/documentation/documentation/screenshots/output.png">
+The output will also be saved on ```./algorithm/output/``` directory as [routines.xlsx](https://raw.githubusercontent.com/smmehrab/ClassNow/master/algorithm/output/routines.xlsx).
+
+<br>
+
+## Cookbook
+
+<br>
+
+To use it to generate routines for any valid input, follow these:
+
+1. Download the [sample input](https://raw.githubusercontent.com/smmehrab/ClassNow/master/algorithm/data/input.xlsx). 
+    > To maintain the input format
+
+2. Edit it as you like & save the changes. 
+    > Insert any valid input
+
+3.  Run
+    ```
+    npm start
+    ```
+
+4. Get the output as a ```.xlsx``` file from [./algorithm/output/](https://github.com/smmehrab/ClassNow/tree/master/algorithm/output/).
