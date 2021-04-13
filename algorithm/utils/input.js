@@ -1,5 +1,5 @@
 // Tools
-const ExcelReader = require('xlsx');
+const Excel = require('xlsx');
 
 // Classes
 const Session = require('./../classes/session');
@@ -28,10 +28,10 @@ function sessionCompare(a, b){
 // Loading Input from Excel File
 // Populating sessions, timeSlots, teachers, batches
 function load(inputPath, sessions, timeSlots, teachers, batches) {
-    const input = ExcelReader.readFile(inputPath);
+    const input = Excel.readFile(inputPath);
     const numberOfSheets = input.SheetNames.length;
     for(let i = 0; i < numberOfSheets; i++) {
-        const entries = ExcelReader.utils.sheet_to_json(input.Sheets[input.SheetNames[i]]);
+        const entries = Excel.utils.sheet_to_json(input.Sheets[input.SheetNames[i]]);
         let index = 0;
         entries.forEach((entry) => {
             if(input.SheetNames[i] == "sessions") {

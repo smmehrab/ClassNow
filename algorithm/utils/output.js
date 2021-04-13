@@ -1,5 +1,85 @@
+const Excel = require('xlsx');
 const Table = require('table');
 const Routine = require('./../classes/routine');
+
+function saveRoutines(routines, sessions) {
+    var wordbook = Excel.utils.book_new();
+    var worksheetName, worksheetData, worksheet, worksheetColumns;
+    var worksheetRows = [
+        {hpt: 20}, 
+        {hpt: 20}, 
+        {hpt: 20}, 
+        {hpt: 20}, 
+        {hpt: 20}, 
+        {hpt: 20}
+    ];
+    let yearNames = ["First Year", "Second Year", "Third Year", "Fourth Year"];
+
+    title = [
+        ['CSEDU Routines']
+    ];
+
+    for(let batch=1; batch<=3; batch++) {
+
+        worksheetName = yearNames[batch-1]; 
+        worksheetData = [
+            ['Day/Time', '08:30 AM', '10:00 AM', '11:30 AM', '02:00 PM', '03:30 PM'],
+            ['Sunday', '', '', '', '', ''],
+            ['Monday', '', '', '', '', ''],
+            ['Tuesday', '', '', '', '', ''],
+            ['Wednesday', '', '', '', '', ''],
+            ['Thursday', '', '', '', '', '']
+        ];
+
+        for(let day=0; day<5; day++) {
+            for(let slot=0; slot<5; slot++) {
+                var sessionIndices = routines[batch].getSessions(day, slot);
+                if(sessionIndices.length>0) {
+                    sessionIndices.forEach(index => {
+                        let session = sessions[index];
+                        let sessionName = session.course;
+                        if(session.type == "Lab") {
+                            sessionName += " " + session.group;
+                            if(session.isAlternate) {
+                                sessionName += " " + "(alternate)";
+                            }
+                        }
+                        if(worksheetData[day+1][slot+1].length>0) {
+                            worksheetData[day+1][slot+1] += '; ';
+                        }
+                        worksheetData[day+1][slot+1] += sessionName;
+                    });
+                }
+            }
+        }
+
+
+        worksheetColumns = [
+            {wch:10},
+            {wch:10},
+            {wch:10},
+            {wch:10},
+            {wch:10},
+            {wch:10}
+        ];
+        for(let slot=0; slot<5; slot++) {
+            let maxWidth = worksheetColumns[slot+1].wch;
+            for(let day=0; day<5; day++) {
+                if(worksheetData[day+1][slot+1].length>0) {
+                    maxWidth = Math.max(maxWidth, worksheetData[day+1][slot+1].length+2);
+                }
+            }
+            worksheetColumns[slot+1].wch = maxWidth;
+        }
+
+        worksheet = Excel.utils.aoa_to_sheet(worksheetData);     
+        worksheet['!rows'] = worksheetRows;
+        worksheet['!cols'] = worksheetColumns;
+        Excel.utils.book_append_sheet(wordbook, worksheet, worksheetName);
+    }
+
+    Excel.writeFile(wordbook, './output/routines.xlsx');
+}
 
 function showRoutines(routines, sessions) {
     
@@ -112,5 +192,6 @@ function debugRoutines(routines) {
     // console.log(routines);
 }
 
+module.exports.saveRoutines = saveRoutines;
 module.exports.showRoutines = showRoutines;
 module.exports.debugRoutines = debugRoutines;

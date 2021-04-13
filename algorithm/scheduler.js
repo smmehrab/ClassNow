@@ -136,6 +136,7 @@ function main() {
     }
 
     if(isPossible) {
+        Output.saveRoutines(routines, sessions);
         Output.showRoutines(routines, sessions);
     }
     else {
